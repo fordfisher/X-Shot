@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>X-Shot — Capture. Mark up. Move on.</title>
+    <meta
+      name="description"
+      content="X-Shot is a macOS screenshot app for people who capture all day. One hotkey to select, annotate, and ship — without breaking flow."
+    />
+    <meta property="og:title" content="X-Shot — Capture. Mark up. Move on." />
+    <meta
+      property="og:description"
+      content="Take a lot of screenshots? Annotate them the moment you capture — arrows, highlights, blur, text. macOS, ⇧⌘4."
+    />
+    <meta property="og:image" content="assets/icon.png" />
+    <link rel="icon" href="assets/icon-128.png" type="image/png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Figtree:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-nav">
+      <a class="nav-brand" href="#top" aria-label="X-Shot home">
+        <img src="assets/icon-128.png" width="28" height="28" alt="" />
+        <span>X-Shot</span>
+      </a>
+      <nav class="nav-links">
+        <a href="#flow">How it works</a>
+        <a href="#why">Why it fits</a>
+        <a
+          class="nav-cta"
+          href="https://github.com/fordfisher/X-Shot/releases/latest"
+          >Download</a
+        >
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero" aria-labelledby="hero-brand">
+        <div class="hero-atmosphere" aria-hidden="true"></div>
+        <div class="hero-copy">
+          <p class="brand" id="hero-brand">X-Shot</p>
+          <h1>Screenshots that are ready to send — not parked in a folder.</h1>
+          <p class="lede">
+            Hit one hotkey, crop what matters, mark it up, and keep moving.
+            Built for people who screenshot constantly.
+          </p>
+          <div class="cta-row">
+            <a
+              class="btn btn-primary"
+              href="https://github.com/fordfisher/X-Shot/releases/latest"
+              >Download for Mac</a
+            >
+            <a
+              class="btn btn-ghost"
+              href="https://github.com/fordfisher/X-Shot"
+              >View on GitHub</a
+            >
+          </div>
+          <p class="meta">
+            macOS 14+ · Default hotkey
+            <span class="keys"><kbd>⇧</kbd><kbd>⌘</kbd><kbd>4</kbd></span>
+            · Free &amp; open source
+          </p>
+        </div>
+
+        <div class="hero-stage" aria-hidden="true">
+          <div class="stage-desk">
+            <div class="stage-window">
+              <div class="stage-chrome">
+                <span></span><span></span><span></span>
+                <p>Sprint board · Needs a callout</p>
+              </div>
+              <div class="stage-body">
+                <div class="fake-ui">
+                  <div class="fake-row"></div>
+                  <div class="fake-row short"></div>
+                  <div class="fake-card"></div>
+                  <div class="fake-card muted"></div>
+                </div>
+                <div class="selection">
+                  <div class="selection-label">248 × 162</div>
+                </div>
+                <svg class="annots" viewBox="0 0 480 300" fill="none">
+                  <path
+                    class="annot-arrow"
+                    d="M86 210 L210 118"
+                    stroke="#EF4444"
+                    stroke-width="4"
+                    stroke-linecap="round"
+                  />
+                  <path
+                    class="annot-arrow-head"
+                    d="M210 118 L188 124 L204 140 Z"
+                    fill="#EF4444"
+                  />
+                  <rect
+                    class="annot-box"
+                    x="248"
+                    y="72"
+                    width="132"
+                    height="78"
+                    rx="4"
+                    stroke="#0D9488"
+                    stroke-width="3"
+                  />
+                  <path
+                    class="annot-hi"
+                    d="M70 248 H210"
+                    stroke="#FDE047"
+                    stroke-width="14"
+                    stroke-linecap="round"
+                    opacity="0.75"
+                  />
+                  <text
+                    class="annot-text"
+                    x="262"
+                    y="56"
+                    fill="#1C1F24"
+                    font-family="Figtree, sans-serif"
+                    font-size="15"
+                    font-weight="600"
+                  >
+                    Ship this
+                  </text>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section flow" id="flow">
+        <p class="eyebrow">How it works</p>
+        <h2>Three beats. Zero ceremony.</h2>
+        <p class="section-lede">
+          X-Shot stays out of your way until you need it — then it finishes the
+          job before your next Slack message.
+        </p>
+        <ol class="steps">
+          <li>
+            <span class="step-num">01</span>
+            <h3>Select</h3>
+            <p>Drag a region. Same muscle memory as the system shot — ⇧⌘4 by default.</p>
+          </li>
+          <li>
+            <span class="step-num">02</span>
+            <h3>Annotate</h3>
+            <p>Arrows, boxes, highlighter, text, blur. Keyboard shortcuts while you edit.</p>
+          </li>
+          <li>
+            <span class="step-num">03</span>
+            <h3>Ship</h3>
+            <p>Clipboard is ready. Keep a library when you need the shot again later.</p>
+          </li>
+        </ol>
+      </section>
+
+      <section class="section why" id="why">
+        <div class="why-copy">
+          <p class="eyebrow">Why it fits</p>
+          <h2>Made for high-volume screenshotters.</h2>
+          <p class="section-lede">
+            If your day is bug reports, design feedback, support replies, and
+            “can you circle that?” — the friction isn’t capturing. It’s
+            everything after.
+          </p>
+          <ul class="fit-list">
+            <li>
+              <strong>Annotate in the same breath</strong>
+              No bounce to Preview, no “where did that PNG go?”
+            </li>
+            <li>
+              <strong>Stay in flow</strong>
+              Capture lands in an editor that feels like a quick mark-up desk,
+              not a project.
+            </li>
+            <li>
+              <strong>Keep what matters</strong>
+              Clipboard for now. Library for the shots you’ll reuse.
+            </li>
+          </ul>
+        </div>
+        <aside class="tool-rail" aria-label="Annotation tools">
+          <p class="tool-rail-label">On the canvas</p>
+          <ul>
+            <li><span class="glyph arrow"></span>Arrow</li>
+            <li><span class="glyph rect"></span>Rectangle</li>
+            <li><span class="glyph hi"></span>Highlighter</li>
+            <li><span class="glyph text"></span>Text</li>
+            <li><span class="glyph blur"></span>Blur</li>
+            <li><span class="glyph pen"></span>Pen</li>
+          </ul>
+        </aside>
+      </section>
+
+      <section class="section get" id="get">
+        <p class="eyebrow">Get X-Shot</p>
+        <h2>Install once. Screenshot better every day.</h2>
+        <p class="section-lede">
+          Universal Mac build. Open source. Download the app, or build from
+          source if that’s your vibe.
+        </p>
+        <div class="cta-row">
+          <a
+            class="btn btn-primary"
+            href="https://github.com/fordfisher/X-Shot/releases/latest"
+            >Download XShot.app</a
+          >
+          <a class="btn btn-ghost" href="https://github.com/fordfisher/X-Shot"
+            >Clone &amp; build</a
+          >
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <img src="assets/icon-128.png" width="22" height="22" alt="" />
+      <p>X-Shot — capture, annotate, move on.</p>
+      <a href="https://github.com/fordfisher/X-Shot">GitHub</a>
+    </footer>
+
+    <script src="main.js"></script>
+  </body>
+</html>
