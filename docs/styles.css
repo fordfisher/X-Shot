@@ -528,25 +528,15 @@ a {
   border-radius: 8px;
   background: var(--bg-deep);
   position: relative;
+  display: inline-grid;
+  place-items: center;
+  flex-shrink: 0;
 }
 
-.glyph.arrow::before {
-  content: "";
-  position: absolute;
-  inset: 45% 18% auto 18%;
-  height: 2px;
-  background: var(--danger);
-  transform: rotate(-28deg);
-}
-
-.glyph.arrow::after {
-  content: "";
-  position: absolute;
-  right: 18%;
-  top: 30%;
-  border: 5px solid transparent;
-  border-left-color: var(--danger);
-  transform: rotate(-28deg);
+.glyph svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  display: block;
 }
 
 .glyph.rect::before {
@@ -592,18 +582,6 @@ a {
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.45);
   filter: blur(2px);
-}
-
-.glyph.pen::before {
-  content: "";
-  position: absolute;
-  left: 30%;
-  right: 30%;
-  top: 22%;
-  bottom: 22%;
-  border-radius: 2px;
-  background: var(--ink);
-  transform: rotate(35deg);
 }
 
 .get {
