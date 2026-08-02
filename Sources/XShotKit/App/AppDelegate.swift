@@ -9,11 +9,12 @@ public final class AppDelegate: NSObject, NSApplicationDelegate, HotkeyHandling,
     private var capture = ScreenCaptureService()
     private var store: LibraryStore!
     private var libraryModel: LibraryViewModel!
-    private var hotkeySettings = HotkeySettings.default
+    private var hotkeySettings = HotkeyStore.load()
 
     private var libraryWindow: NSWindow?
     private var settingsWindow: NSWindow?
     private var editorWindows: [UUID: NSWindow] = [:]
+    private var captureMenuItem: NSMenuItem?
 
     public override init() {
         super.init()
@@ -35,6 +36,7 @@ public final class AppDelegate: NSObject, NSApplicationDelegate, HotkeyHandling,
 
         setupStatusItem()
         setupMainMenu()
+        refreshCaptureMenuTitle()
 
         if !ScreenCaptureService.hasScreenRecordingPermission() {
             _ = ScreenCaptureService.requestScreenRecordingPermission()
@@ -43,7 +45,7 @@ public final class AppDelegate: NSObject, NSApplicationDelegate, HotkeyHandling,
 
     // MARK: - HotkeyHandling
 
-    public func hotkeyTriggered(_ chord: HotkeyChord) {
+    public func hotkeyTriggered() {
         beginCapture()
     }
 
@@ -123,17 +125,19 @@ public final class AppDelegate: NSObject, NSApplicationDelegate, HotkeyHandling,
             },
             onApplyHotkeys: { [weak self] in
                 guard let self else { return }
+                HotkeyStore.save(self.hotkeySettings)
                 self.hotkeys.apply(self.hotkeySettings)
+                self.refreshCaptureMenuTitle()
             }
         )
         let hosting = NSHostingController(rootView: root)
-        hosting.view.frame = NSRect(origin: .zero, size: WindowFactory.settingsSize)
+        hosting.view.frame = NSRect(origin: .zero, size: NSSize(width: 480, height: 460))
         let window = WindowFactory.make(
             title: "X-Shot Settings",
-            size: WindowFactory.settingsSize,
-            minSize: NSSize(width: 400, height: 320),
+            size: NSSize(width: 480, height: 460),
+            minSize: NSSize(width: 420, height: 380),
             content: hosting,
-            autosaveName: "XShot.Settings"
+            autosaveName: "XShot.Settings.v2"
         )
         window.makeKeyAndOrderFront(nil)
         settingsWindow = window
@@ -277,7 +281,9 @@ public final class AppDelegate: NSObject, NSApplicationDelegate, HotkeyHandling,
             button.image?.isTemplate = true
         }
         let menu = NSMenu()
-        menu.addItem(NSMenuItem(title: "Capture Region  ⌃⇧⌘4", action: #selector(captureMenuAction), keyEquivalent: ""))
+        let capture = NSMenuItem(title: "Capture Region", action: #selector(captureMenuAction), keyEquivalent: "")
+        captureMenuItem = capture
+        menu.addItem(capture)
         menu.addItem(NSMenuItem(title: "Library…", action: #selector(libraryMenuAction), keyEquivalent: "l"))
         menu.addItem(NSMenuItem(title: "Settings…", action: #selector(settingsMenuAction), keyEquivalent: ","))
         menu.addItem(.separator())
@@ -287,6 +293,12 @@ public final class AppDelegate: NSObject, NSApplicationDelegate, HotkeyHandling,
         }
         item.menu = menu
         statusItem = item
+        refreshCaptureMenuTitle()
+    }
+
+    private func refreshCaptureMenuTitle() {
+        let label = HotkeyParser.displayName(for: hotkeySettings)
+        captureMenuItem?.title = "Capture Region  \(label)"
     }
 
     private func setupMainMenu() {
@@ -306,7 +318,7 @@ public final class AppDelegate: NSObject, NSApplicationDelegate, HotkeyHandling,
         main.addItem(captureMenuItem)
         let captureMenu = NSMenu(title: "Capture")
         let captureItem = NSMenuItem(title: "Capture Region", action: #selector(captureMenuAction), keyEquivalent: "4")
-        captureItem.keyEquivalentModifierMask = [.control, .shift, .command]
+        captureItem.keyEquivalentModifierMask = [.shift, .command]
         captureItem.target = self
         captureMenu.addItem(captureItem)
         let libItem = NSMenuItem(title: "Library", action: #selector(libraryMenuAction), keyEquivalent: "l")

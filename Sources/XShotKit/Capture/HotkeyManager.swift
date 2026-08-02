@@ -2,7 +2,7 @@ import Carbon
 import Foundation
 
 public protocol HotkeyHandling: AnyObject {
-    @MainActor func hotkeyTriggered(_ chord: HotkeyChord)
+    @MainActor func hotkeyTriggered()
 }
 
 /// Registers global hotkeys via Carbon (no Accessibility permission required).
@@ -59,9 +59,8 @@ public final class HotkeyManager {
                     &hotKeyID
                 )
                 guard hotKeyID.signature == HotkeyManager.signature else { return noErr }
-                let chord: HotkeyChord = hotKeyID.id == 2 ? .f13 : .controlShiftCommand4
                 DispatchQueue.main.async {
-                    HotkeyManager.sharedInstance?.handler?.hotkeyTriggered(chord)
+                    HotkeyManager.sharedInstance?.handler?.hotkeyTriggered()
                 }
                 return noErr
             },
@@ -76,10 +75,12 @@ public final class HotkeyManager {
     }
 
     private func registerAll() {
-        // id 1 = primary ⌃⇧⌘4, id 2 = F13
-        register(keyCode: UInt32(kVK_ANSI_4), modifiers: UInt32(controlKey | shiftKey | cmdKey), id: 1)
-        if settings.alsoF13 {
-            register(keyCode: UInt32(kVK_F13), modifiers: 0, id: 2)
+        let primary = settings.primary
+        register(keyCode: primary.keyCode, modifiers: primary.carbonModifiers, id: 1)
+
+        let primaryIsF13 = primary.keyCode == HotkeyBinding.f13.keyCode && primary.carbonModifiers == 0
+        if settings.alsoF13 && !primaryIsF13 {
+            register(keyCode: HotkeyBinding.f13.keyCode, modifiers: 0, id: 2)
         }
     }
 
@@ -106,30 +107,5 @@ public final class HotkeyManager {
             if let ref { UnregisterEventHotKey(ref) }
         }
         hotKeyRefs.removeAll()
-    }
-}
-
-/// Pure helpers for tests / settings display.
-public enum HotkeyParser {
-    public static func displayName(for settings: HotkeySettings) -> String {
-        var parts = [settings.primary.displayName]
-        if settings.alsoF13 && settings.primary != .f13 {
-            parts.append(HotkeyChord.f13.displayName)
-        }
-        return parts.joined(separator: " · ")
-    }
-
-    public static func parseDisplay(_ string: String) -> HotkeySettings? {
-        let s = string.uppercased()
-        if s.contains("F13") && (s.contains("4") || s.contains("⌃") || s.contains("CTRL")) {
-            return HotkeySettings(primary: .controlShiftCommand4, alsoF13: true)
-        }
-        if s.contains("F13") {
-            return HotkeySettings(primary: .f13, alsoF13: true)
-        }
-        if s.contains("4") {
-            return HotkeySettings(primary: .controlShiftCommand4, alsoF13: false)
-        }
-        return nil
     }
 }

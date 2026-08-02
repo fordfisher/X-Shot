@@ -59,14 +59,13 @@ final class LibraryStoreTests: XCTestCase {
 
 final class HotkeyParserTests: XCTestCase {
     func testDisplayName() {
-        let s = HotkeySettings(primary: .controlShiftCommand4, alsoF13: true)
-        XCTAssertEqual(HotkeyParser.displayName(for: s), "⌃⇧⌘4 · F13")
+        let s = HotkeySettings(preset: .shiftCommand4, alsoF13: true)
+        XCTAssertEqual(HotkeyParser.displayName(for: s), "⇧⌘4 · F13")
     }
 
-    func testParse() {
-        XCTAssertEqual(HotkeyParser.parseDisplay("⌃⇧⌘4 · F13")?.alsoF13, true)
-        XCTAssertEqual(HotkeyParser.parseDisplay("F13 only")?.primary, .f13)
-        XCTAssertNil(HotkeyParser.parseDisplay("nonsense"))
+    func testDefaultIsShiftCommand4() {
+        XCTAssertEqual(HotkeySettings.default.preset, .shiftCommand4)
+        XCTAssertEqual(HotkeyBinding.shiftCommand4.displayName, "⇧⌘4")
     }
 }
 

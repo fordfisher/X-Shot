@@ -145,27 +145,3 @@ public struct CGPointCodable: Codable, Equatable, Sendable {
 
     public var cgPoint: CGPoint { CGPoint(x: x, y: y) }
 }
-
-public enum HotkeyChord: Equatable, Sendable {
-    case controlShiftCommand4
-    case f13
-
-    public var displayName: String {
-        switch self {
-        case .controlShiftCommand4: return "⌃⇧⌘4"
-        case .f13: return "F13"
-        }
-    }
-}
-
-public struct HotkeySettings: Equatable, Sendable {
-    public var primary: HotkeyChord
-    public var alsoF13: Bool
-
-    public static let `default` = HotkeySettings(primary: .controlShiftCommand4, alsoF13: true)
-
-    public init(primary: HotkeyChord = .controlShiftCommand4, alsoF13: Bool = true) {
-        self.primary = primary
-        self.alsoF13 = alsoF13
-    }
-}

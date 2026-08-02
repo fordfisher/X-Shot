@@ -274,7 +274,7 @@ public struct LibraryView: View {
             Text("X-Shot")
                 .font(.system(size: 42, weight: .bold, design: .serif))
                 .foregroundStyle(Color(nsColor: NSColor(xshotHex: XShotTheme.textHex)))
-            Text("Press ⌃⇧⌘4 to capture a region.\nIt lands here, on your clipboard, and in the editor.")
+            Text("Press ⇧⌘4 to capture a region.\nIt lands here, on your clipboard, and in the editor.")
                 .multilineTextAlignment(.center)
                 .foregroundStyle(Color(nsColor: NSColor(xshotHex: XShotTheme.mutedHex)))
                 .frame(maxWidth: 380)

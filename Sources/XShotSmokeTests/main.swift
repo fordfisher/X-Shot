@@ -88,11 +88,13 @@ enum SmokeTests {
     }
 
     static func testHotkeyParser() throws {
-        let s = HotkeySettings(primary: .controlShiftCommand4, alsoF13: true)
-        guard HotkeyParser.displayName(for: s) == "⌃⇧⌘4 · F13" else { throw TestError("display") }
-        guard HotkeyParser.parseDisplay("⌃⇧⌘4 · F13")?.alsoF13 == true else { throw TestError("parse both") }
-        guard HotkeyParser.parseDisplay("F13 only")?.primary == .f13 else { throw TestError("parse f13") }
-        guard HotkeyParser.parseDisplay("nonsense") == nil else { throw TestError("parse junk") }
+        let s = HotkeySettings(preset: .shiftCommand4, alsoF13: true)
+        guard HotkeyParser.displayName(for: s) == "⇧⌘4 · F13" else { throw TestError("display") }
+        guard HotkeyBinding.shiftCommand4.displayName == "⇧⌘4" else { throw TestError("default glyph") }
+        guard HotkeySettings.default.preset == .shiftCommand4 else { throw TestError("default preset") }
+        let custom = HotkeySettings(preset: .custom, custom: .optionShiftCommand4, alsoF13: false)
+        guard custom.primary.displayName == "⌥⇧⌘4" else { throw TestError("custom primary") }
+        guard HotkeyParser.displayName(for: custom) == "⌥⇧⌘4" else { throw TestError("custom display") }
     }
 
     static func testColorCodec() throws {
