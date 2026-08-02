@@ -6,7 +6,7 @@ Apple Silicon screenshot app for selected parts of the screen. Copies to the cli
 
 Grab the latest compiled app from [Releases](https://github.com/fordfisher/X-Shot/releases): unzip `XShot.app.zip` and open `XShot.app`.
 
-Product site: open [`docs/index.html`](docs/index.html) locally, or enable GitHub Pages from the `docs/` folder.
+Product site: [fordfisher.github.io/X-Shot](https://fordfisher.github.io/X-Shot/) (also in [`docs/`](docs/)).
 
 ## Requirements
 
