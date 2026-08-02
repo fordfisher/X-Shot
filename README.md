@@ -2,6 +2,10 @@
 
 Apple Silicon screenshot app for selected parts of the screen. Copies to the clipboard, opens an editor, and includes a library. Default hotkey: **⇧⌘4**.
 
+## Download
+
+Grab the latest compiled app from [Releases](https://github.com/fordfisher/X-Shot/releases): unzip `XShot.app.zip` and open `XShot.app`.
+
 ## Requirements
 
 - macOS 14+
