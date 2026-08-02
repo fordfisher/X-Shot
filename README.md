@@ -1,2 +1,31 @@
 # X-Shot
-Apple Silicon Screenshot app for selected parts of the screen, only. Copies to clipboard, opens editor, has library included. Registers to Shift+CMD+4. 
+
+Apple Silicon screenshot app for selected parts of the screen. Copies to the clipboard, opens an editor, and includes a library. Default hotkey: **⇧⌘4**.
+
+## Requirements
+
+- macOS 14+
+- Xcode Command Line Tools (`xcode-select --install`)
+
+## Build
+
+```bash
+git clone https://github.com/fordfisher/X-Shot.git
+cd X-Shot
+./Scripts/build-app.sh
+open dist/XShot.app
+```
+
+That produces `dist/XShot.app` with the same icon and resources as this repo (`Resources/AppIcon.icns` + `Resources/AppIcon.iconset/`).
+
+To regenerate the icon from the Swift generator:
+
+```bash
+swift Scripts/generate-icon.swift .
+```
+
+## Test
+
+```bash
+./Scripts/test.sh
+```
